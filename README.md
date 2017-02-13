@@ -31,7 +31,18 @@
 
     `origin  git@github.com:michaelliao/learngit.git (fetch)`
     `origin  git@github.com:michaelliao/learngit.git (push)`
-    
+
 上面显示了可以抓取和推送的origin的地址。如果没有推送权限，就看不到push的地址。
+
 1. git checkout -b dev origin/dev 检出远程分支dev到本地 
 2. git log 显示从最近到最远的提交日志。 git log --prettry=oneline 输出一行信息
+3. git checkout -b dev origin/dev 检出远程分支dev到本地 
+4. git log 显示从最近到最远的提交日志。 git log --prettry=oneline 输出一行信息
+5. 命令git tag <name>用于新建一个标签，默认为HEAD，也可以指定一个commit id；
+6. git tag -a <tagname> -m "提交信息..."可以指定标签信息；
+7. git tag可以查看所有标签。
+8. git tag -d <标签名> 删除标签。
+9. git push origin <tagname> 推送某个标签到远程。
+10. git push origin --tags 一次性推送全部尚未推送到远程的本地标签
+11. git tag -d <标签名> 删除本地标签
+12. 删除远程标签 步骤1：git tag -d <标签名> 线删除本地标签，步骤2：git push origin :refs/tags/<tagname>删除远程标签。
