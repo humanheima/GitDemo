@@ -15,4 +15,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
     }
+
+    private void backToLastCommit(){
+        
+    }
 }
