@@ -18,8 +18,12 @@ public class MainActivity extends AppCompatActivity {
 
     private void backToLastCommit() {
     }
-        
+
     private void testReset() {
+
+    }
+
+    private void testResetNoConflict() {
 
     }
 }
