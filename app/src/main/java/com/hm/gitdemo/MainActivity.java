@@ -16,7 +16,10 @@ public class MainActivity extends AppCompatActivity {
         super.onDestroy();
     }
 
-    private void backToLastCommit(){
+    private void backToLastCommit() {
+    }
         
+    private void testReset() {
+
     }
 }
