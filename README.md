@@ -7,8 +7,18 @@
 6. git reflog 查看操作的历史
 7. git reset --hard 3628164 回退到某个特定commit id
 8. git diff filename 查看工作区中的文件和暂存区（或者版本库）中文件的区别。
-9. git checkout -- file 丢弃工作区文件的修改。这里有两种情况：一种是file修改后还没有被放到暂存区，现在，撤销修改就回到和版本库一模一样的状态；一种是file已经添加到暂存区后，又作了修改，现在，撤销修改就回到添加到暂存区后的状态。总之，就是让这个文件回到最近一次git commit或git add时的状态。（）
-10. git reset HEAD file  把暂存区的修改撤销掉（unstage），重新放回工作区**关于撤销修改：**场景1：当你改乱了工作区某个文件的内容，想直接丢弃工作区的修改时，用命令git checkout -- file。场景2：当你不但改乱了工作区某个文件的内容，还添加到了暂存区时，想丢弃修改，分两步，第一步用命令git reset HEAD file，就回到了场景1，第二步按场景1操作。场景3：已经提交了不合适的修改到版本库时，想要撤销本次提交，git reset --hard HEAD^，不过前提是没有推送到远程库。
+9. git checkout -- file 丢弃工作区文件的修改。这里有两种情况：一种是file修改后还没有被放到暂存区，现在，撤销修改就回到和版本库一模一样的状态；
+一种是file已经添加到暂存区后，又作了修改，现在，撤销修改就回到添加到暂存区后的状态。总之，就是让这个文件回到最近一次git commit或git add时的状态。
+10. git reset HEAD file  把暂存区的修改撤销掉（unstage），重新放回工作区
+
+**关于撤销修改**
+
+场景1：当你改乱了工作区某个文件的内容，想直接丢弃工作区的修改时，用命令git checkout -- file。
+
+场景2：当你不但改乱了工作区某个文件的内容，还添加到了暂存区时，想丢弃修改，分两步，
+第一步用命令git reset HEAD file，就回到了场景1，第二步按场景1操作。
+
+场景3：已经提交了不合适的修改到版本库时，想要撤销本次提交，git reset --hard HEAD^，不过前提是没有推送到远程库。
 11. ssh-keygen -t rsa -C "youremail@example.com" 生成 SHH key
 12.  git branch 查看分支
 13.  git branch branchname 新建分支
@@ -47,12 +57,12 @@
 11. git tag -d <标签名> 删除本地标签
 12. 删除远程标签 步骤1：git tag -d <标签名> 线删除本地标签，步骤2：git push origin :refs/tags/<tagname>删除远程标签。
 
-#git常用场景操作
-#场景：本地代码已推送至远程仓库 ，此时需要回退到上一个版本进行修改，并推送至远程仓库。
-#步骤
+##git常用场景操作
+###场景：本地代码已推送至远程仓库 ，此时需要回退到上一个版本进行修改，并推送至远程仓库。
+##步骤
 1. git reset --hard HEAD^
-2.修改 本地文件后，git add ,git commit.
-3.git pull 拉取远程代码，此时可能会有冲突
-4.如果有冲突则解决冲突
+2. 修改 本地文件后，git add ,git commit.
+3. git pull 拉取远程代码，此时可能会有冲突
+4. 如果有冲突则解决冲突
 5. git push 推送本地修改
 
