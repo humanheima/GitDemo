@@ -57,12 +57,17 @@
 11. git tag -d <标签名> 删除本地标签
 12. 删除远程标签 步骤1：git tag -d <标签名> 线删除本地标签，步骤2：git push origin :refs/tags/<tagname>删除远程标签。
 
-##git常用场景操作
-###场景：本地代码已推送至远程仓库 ，此时需要回退到上一个版本进行修改，并推送至远程仓库。
-##步骤
+## git常用场景操作
+### 场景：本地代码已推送至远程仓库 ，此时需要回退到上一个版本进行修改，并推送至远程仓库。
+### 步骤
 1. git reset --hard HEAD^
 2. 修改 本地文件后，git add ,git commit.
 3. git pull 拉取远程代码，此时可能会有冲突
 4. 如果有冲突则解决冲突
 5. git push 推送本地修改
+
+## How to make Git “forget” about a file that was tracked but is now in .gitignore?
+1. git rm -r --cached .
+2. git add .
+3. git commit -m "Remove ignored files"
 
