@@ -19,6 +19,7 @@
 第一步用命令git reset HEAD file，就回到了场景1，第二步按场景1操作。
 
 场景3：已经提交了不合适的修改到版本库时，想要撤销本次提交，git reset --hard HEAD^，不过前提是没有推送到远程库。
+
 11. ssh-keygen -t rsa -C "youremail@example.com" 生成 SHH key
 12.  git branch 查看分支
 13.  git branch branchname 新建分支
