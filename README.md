@@ -71,3 +71,9 @@
 2. git add .
 3. git commit -m "Remove ignored files"
 
+## git rebase
+1. 使用 git rebase 从远端拉取
+2. 如果出现了冲突，首先手动解决冲突文件，然后使用 git add/rm <conflicted_files> 来添加或者移除冲突文件
+3. 使用 git rebase --continue 继续变基，如果你想放弃这次变基的话，使用git rebase --abort
+
+
