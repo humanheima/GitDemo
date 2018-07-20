@@ -48,7 +48,6 @@
 1. git checkout -b dev origin/dev 检出远程分支dev到本地 
 2. git log 显示从最近到最远的提交日志。 git log --prettry=oneline 输出一行信息
 3. git checkout -b dev origin/dev 检出远程分支dev到本地 
-4. git log 显示从最近到最远的提交日志。 git log --prettry=oneline 输出一行信息
 5. 命令git tag <name>用于新建一个标签，默认为HEAD，也可以指定一个commit id；
 6. git tag -a <tagname> -m "提交信息..."可以指定标签信息；
 7. git tag可以查看所有标签。
