@@ -76,4 +76,8 @@
 2. 如果出现了冲突，首先手动解决冲突文件，然后使用 git add/rm <conflicted_files> 来添加或者移除冲突文件
 3. 使用 git rebase --continue 继续变基，如果你想放弃这次变基的话，使用git rebase --abort
 
+## git push
+如果我想把本地的another分支推送到远程其他名字的分支，可以使用
+git push origin HEAD:<其他分支的名字> 例如 git push origin HEAD:master
+
 
