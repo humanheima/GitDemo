@@ -1,6 +1,7 @@
 ##git常用命令
 1. git config core.autocrlf true .这个命令解决（[master warning: LF will be replaced by CRLF）
 2. gitk 打开图形化界面。
+gitk --all 显示所有分支的图谱
 3. git reset --hard HEAD^ 从当前版本回退到上一个版本
 4. git reset --hard HEAD^^ 从当前版本回退到上2个版本
 5. git reset --hard HEAD~100 从当前版本回退到上100个版本
