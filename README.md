@@ -37,6 +37,7 @@
 25.  git branch -D <name> 强行删除一个没有被合并过的分支
 26.  git remote 查看远程库的信息
 27.  git remote -v显示更详细的信息 
+28.  git pull -rebase 使用变基的形式拉取代码
 
     `git remote -v`
 
@@ -80,4 +81,22 @@
 如果我想把本地的another分支推送到远程其他名字的分支，可以使用
 git push origin HEAD:<其他分支的名字> 例如 git push origin HEAD:master
 
+1.我把我的本地分支dmw推送到了远端的dmw,但是发现改错了，需要回退到上一个版本
+```xml
+git reset --hard HEAD^  //本地回退到上一个版本
+git push --force //强制推送到远端，覆盖远端的版本即可
+```
 
+## 删除文件
+如果确实需要删除文件
+那就用命令git rm删掉，并且git commit
+```git rm test.txt
+git commit -m "remove test.txt"
+```
+另一种情况是删错了，因为版本库里还有呢，所以可以很轻松地把误删的文件恢复到最新版本,
+git checkout其实是用版本库里的版本替换工作区的版本，无论工作区是修改还是删除，都可以“一键还原”。
+```
+git checkout -- test.txt
+```
+##交互式rebase
+git rebase - i 
