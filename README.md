@@ -1,7 +1,7 @@
+参考链接：https://github.com/geeeeeeeeek/git-recipes
 ##git常用命令
 1. git config core.autocrlf true .这个命令解决（[master warning: LF will be replaced by CRLF）
-2. gitk 打开图形化界面。
-gitk --all 显示所有分支的图谱
+2. gitk 打开图形化界面 gitk --all 显示所有分支的图谱
 3. git reset --hard HEAD^ 从当前版本回退到上一个版本
 4. git reset --hard HEAD^^ 从当前版本回退到上2个版本
 5. git reset --hard HEAD~100 从当前版本回退到上100个版本
@@ -101,3 +101,76 @@ git checkout -- test.txt
 ```
 ##交互式rebase
 git rebase - i 
+
+##rebase
+场景 存在master分支，然后从master分支检出dmw分支，然后两者并行工作，master分支上提交了两次，dmw分支上也提交了两次，现在图谱如下
+![初始图谱](initial.png)
+
+最终我们的目的是把所有的修改都合并到master分支上，步骤如下
+1. git checkout dmw 首先切换到dmw分支
+2. git rebase master 把dwm分支变基到master分支上
+现在图谱如下
+![rebase_master](rebase_master.png)
+3. 切换到master分支，然后合并dmw分支即可
+```xml
+git checkout master
+git merge dmw
+```
+合并后的图谱
+![merge_dmw](merge_dmw.png)
+
+###交互式rebase
+1. 修改提交记录
+图谱如下
+![](modify_commit_message.png)
+我现在在dmw分支上，我想修改`dmw add a file'这次提交记录，操作步骤
+* 首先回到这次提交的上一次提交，就是`master add two files`这次提交,这次提交的commit id是 e8d22e1 
+```
+git rebase -i e8d22e1
+
+```
+弹出下面的对话框
+![start rebase](start_rebase.png)
+* 然后把`dmw add a file'这次提交的前面的pick改为edit，如下图所示
+![change pick to edit](change_pick_to_edit.png)
+然后保存退出
+* 使用如下命令修改提交信息
+```text
+git commit --amend
+```
+* 修改完提交信息以后，使用 如下命令继续rebase
+```text
+git rebase --continue
+```
+成功以后查看图谱如下
+![modify commit message finish](modify_commit_message_finish.png)
+
+2. 删除某次提交并调整提交的顺序
+现在dmw分支上多做几次提交，图谱如下
+![more commit](more_commit.png)
+我想要做的操作 把 `f634c6a`这个提交删除，交换`144f5e4`和`34afe94`这两次提交交换顺序
+```text
+* 144f5e4 (HEAD -> dmw) delete a line
+* 34afe94  modify dmw.txt add aline
+* f634c6a add dmw2.txt  
+* 8377d1a modify dmw.txt
+* 0d0689c dmw add a file it is ok
+* e8d22e1 master add two files
+
+```
+1.首先回到 `8377d1a modify dmw.txt`这次提交
+```text
+git rebase -i 8377d1a
+```
+图谱如下
+[rebase change commit order and remove one commit](rebase_change_commit_order_and_remove_one_commit.png)
+
+在上面弹出的编辑框中修改如下,然后保存退出即可
+```text
+drop f634c6a add dmw2.txt  
+pick 144f5e4  delete a line
+pick 34afe94  modify dmw.txt add aline
+ 
+```
+修改完成后，查看图谱,成功
+![](after_change_commit_order_and_remove_one_commit.png)
