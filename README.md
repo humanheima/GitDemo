@@ -100,7 +100,27 @@ git checkout其实是用版本库里的版本替换工作区的版本，无论�
 git checkout -- test.txt
 ```
 ##交互式rebase
-git rebase - i 
+`git rebase - i `
+rebase过程中用到的命令提示
+```text
+ Commands:
+# p, pick <commit> = use commit
+# r, reword <commit> = use commit, but edit the commit message
+# e, edit <commit> = use commit, but stop for amending
+# s, squash <commit> = use commit, but meld into previous commit
+# f, fixup <commit> = like "squash", but discard this commit's log message
+# x, exec <command> = run command (the rest of the line) using shell
+# d, drop <commit> = remove commit
+# l, label <label> = label current HEAD with a name
+# t, reset <label> = reset HEAD to a label
+# m, merge [-C <commit> | -c <commit>] <label> [# <oneline>]
+# .       create a merge commit using the original merge commit's
+# .       message (or the oneline, if no original merge commit was
+# .       specified). Use -c <commit> to reword the commit message.
+#
+# These lines can be re-ordered; they are executed from top to bottom.
+
+```
 
 ##rebase
 场景 存在master分支，然后从master分支检出dmw分支，然后两者并行工作，master分支上提交了两次，dmw分支上也提交了两次，现在图谱如下
@@ -158,7 +178,7 @@ git rebase --continue
 * e8d22e1 master add two files
 
 ```
-1.首先回到 `8377d1a modify dmw.txt`这次提交
+* 首先回到 `8377d1a modify dmw.txt`这次提交
 ```text
 git rebase -i 8377d1a
 ```
@@ -174,3 +194,124 @@ pick 34afe94  modify dmw.txt add aline
 ```
 修改完成后，查看图谱,成功
 ![](after_change_commit_order_and_remove_one_commit.png)
+
+3. 合并多次提交未一次提交
+```text
+* 928ae89 (HEAD -> dmw) modify test.txt today
+* 50bb833 modify second time
+* 1b9b1af modify dmw.txt today
+* 68ab912  modify dmw.txt add aline
+* a08b3ec delete a line
+* 8377d1a modify dmw.txt
+* 0d0689c dmw add a file it is ok
+* e8d22e1 master add two files
+
+```
+现在想合并`928ae89`,`50bb833`,`1b9b1af`这三次提交为一次提交，步骤如下
+* 首先回到` 68ab912  modify dmw.txt add aline`这次提交
+```text
+git rebase -i 68ab912
+```
+弹出的编辑框如下
+![marge many commits](merge_many_commits.png)
+然后修改编辑信息如下
+![use squash](use_squash.png)
+保存以后，会弹出一个编辑框，让你输入提交信息，输入提交信息，然后保存
+![input message](input_commit_message.png)
+保存后，变基成功，查看提交历史
+```text
+$ git log --graph --oneline
+
+```
+结果如下，合并了三次提交未一次提交
+```text
+* f0588d4 (HEAD -> dmw) merge three times commits modify dmw.txt today;modifysecond time;modify test.txt today
+* 68ab912  modify dmw.txt add aline
+* a08b3ec delete a line
+* 8377d1a modify dmw.txt
+* 0d0689c dmw add a file it is ok
+* e8d22e1 master add two files
+
+```
+
+4. 现在提交历史如下
+```text
+ d449efe (HEAD -> dmw) modify test.txt
+* 808d9cf add second line haha
+* 6d1d443 add a line in today.txt
+* ec53171 add dmw2.txt
+* 200d218 merge three times commits modify dmw.txt today;modifysecond time;modify test.txt today
+* 065a6e0 create today.txt
+* dfbc4b4 modify dwm.txt on 2018/07/31
+* a08b3ec delete a line
+* 8377d1a modify dmw.txt
+* 0d0689c dmw add a file it is ok
+* e8d22e1 master add two files
+
+```
+现在想要把`6d1d443 add a line in today.txt`这个提交拆分成两次提交信息
+
+* 首先回到这次提交的上次提交`ec53171 add dmw2.txt`
+```text
+git rebase -i ec53171
+```
+弹出的编辑框如下
+```text
+pick 6d1d443 add a line in today.txt
+pick 808d9cf add second line haha
+pick d449efe modify test.txt
+
+```
+然后修改编辑内容如下，并保存
+```text
+edit 6d1d443 add a line in today.txt
+pick 808d9cf add second line haha
+pick d449efe modify test.txt
+
+```
+当前提交历史如下
+```text
+ 6d1d443 (HEAD) add a line in today.txt
+* ec53171 add dmw2.txt
+* 200d218 merge three times commits modify dmw.txt today;modifysecond time;modify test.txt today
+* 065a6e0 create today.txt
+* dfbc4b4 modify dwm.txt on 2018/07/31
+* a08b3ec delete a line
+* 8377d1a modify dmw.txt
+* 0d0689c dmw add a file it is ok
+* e8d22e1 master add two files
+
+
+```
+然后reset到上一个提交,注意 不能加 --hard选项
+```text
+git reset HEAD^
+
+```
+然后修改 today.txt 然后提交一次  ` first split`
+然后再次修改today.txt然后提交一次  `"second split`
+然后运行
+```text
+git rebase --continue
+```
+如果过程中有冲突的话，解决冲突，然后使用 `git add .`,添加解决后的冲突文件，然后再次运行
+```text
+git rebase --continue
+```
+然后会弹出编辑框提示你输入新的提交信息
+最后的提交信息
+```text
+05f7101 (HEAD -> dmw) modify test.txt
+* c0a421b add second line haha
+* 28c919c second split
+* 9793e02 first split
+* ec53171 add dmw2.txt
+* 200d218 merge three times commits modify dmw.txt today;modifysecond time;modify test.txt today
+* 065a6e0 create today.txt
+* dfbc4b4 modify dwm.txt on 2018/07/31
+* a08b3ec delete a line
+* 8377d1a modify dmw.txt
+* 0d0689c dmw add a file it is ok
+* e8d22e1 master add two files
+
+```
