@@ -223,7 +223,7 @@ git rebase -i 68ab912
 $ git log --graph --oneline
 
 ```
-结果如下，合并了三次提交未一次提交
+结果如下，合并了三次提交为一次提交
 ```text
 * f0588d4 (HEAD -> dmw) merge three times commits modify dmw.txt today;modifysecond time;modify test.txt today
 * 68ab912  modify dmw.txt add aline
