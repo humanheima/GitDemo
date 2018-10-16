@@ -1,16 +1,28 @@
-参考链接：https://github.com/geeeeeeeeek/git-recipes
+参考链接：
+[](https://github.com/geeeeeeeeek/git-recipes)
+[](https://git-scm.com/book/zh/v2/%E8%B5%B7%E6%AD%A5-%E5%88%9D%E6%AC%A1%E8%BF%90%E8%A1%8C-Git-%E5%89%8D%E7%9A%84%E9%85%8D%E7%BD%AE)
+
+当安装完 Git 应该做的第一件事就是设置你的用户名称与邮件地址
+```xml
+$ git config --global user.name "John Doe"
+$ git config --global user.email johndoe@example.com
+```
 ##git常用命令
-1. git config core.autocrlf true .这个命令解决（[master warning: LF will be replaced by CRLF）
-2. gitk 打开图形化界面 gitk --all 显示所有分支的图谱
-3. git reset --hard HEAD^ 从当前版本回退到上一个版本
-4. git reset --hard HEAD^^ 从当前版本回退到上2个版本
-5. git reset --hard HEAD~100 从当前版本回退到上100个版本
-6. git reflog 查看操作的历史
-7. git reset --hard 3628164 回退到某个特定commit id
-8. git diff filename 查看工作区中的文件和暂存区（或者版本库）中文件的区别。
+* git log --pretty=oneline 显示简短的提交信息
+* git config core.autocrlf true .这个命令解决（[master warning: LF will be replaced by CRLF）
+* gitk 打开图形化界面 gitk --all 显示所有分支的图谱
+* git reset HEAD file 取消暂存的文件  把暂存区的修改撤销掉（unstage），重新放回工作区 
+* git reset --hard HEAD^ 从当前版本回退到上一个版本
+* git reset --hard HEAD^^ 从当前版本回退到上2个版本
+* git reset --hard HEAD~100 从当前版本回退到上100个版本
+* git reflog 查看操作的历史
+* git reset --hard 3628164 回退到某个特定commit id
+* git diff filename 查看工作区中的文件和暂存区（或者版本库）中文件的区别。
+* git diff --staged filename 查看暂存区中的文件和版本库中文件的区别。
 9. git checkout -- file 丢弃工作区文件的修改。这里有两种情况：一种是file修改后还没有被放到暂存区，现在，撤销修改就回到和版本库一模一样的状态；
 一种是file已经添加到暂存区后，又作了修改，现在，撤销修改就回到添加到暂存区后的状态。总之，就是让这个文件回到最近一次git commit或git add时的状态。
-10. git reset HEAD file  把暂存区的修改撤销掉（unstage），重新放回工作区
+* git status --short 输出简单的状态信息
+* git remote show origin 显示远程仓库更多的信息
 
 **关于撤销修改**
 
@@ -58,15 +70,6 @@
 10. git push origin --tags 一次性推送全部尚未推送到远程的本地标签
 11. git tag -d <标签名> 删除本地标签
 12. 删除远程标签 步骤1：git tag -d <标签名> 线删除本地标签，步骤2：git push origin :refs/tags/<tagname>删除远程标签。
-
-## git常用场景操作
-### 场景：本地代码已推送至远程仓库 ，此时需要回退到上一个版本进行修改，并推送至远程仓库。
-### 步骤
-1. git reset --hard HEAD^
-2. 修改 本地文件后，git add ,git commit.
-3. git pull 拉取远程代码，此时可能会有冲突
-4. 如果有冲突则解决冲突
-5. git push 推送本地修改
 
 ## How to make Git “forget” about a file that was tracked but is now in .gitignore?
 1. git rm -r --cached .
@@ -122,7 +125,7 @@ rebase过程中用到的命令提示
 
 ```
 
-##rebase
+## rebase
 场景 存在master分支，然后从master分支检出dmw分支，然后两者并行工作，master分支上提交了两次，dmw分支上也提交了两次，现在图谱如下
 ![初始图谱](initial.png)
 
@@ -139,7 +142,7 @@ git merge dmw
 合并后的图谱
 ![merge_dmw](merge_dmw.png)
 
-###交互式rebase
+## 交互式rebase
 1. 修改提交记录
 图谱如下
 ![](modify_commit_message.png)
@@ -195,7 +198,7 @@ pick 34afe94  modify dmw.txt add aline
 修改完成后，查看图谱,成功
 ![](after_change_commit_order_and_remove_one_commit.png)
 
-3. 合并多次提交未一次提交
+3. 合并多次提交为一次提交
 ```text
 * 928ae89 (HEAD -> dmw) modify test.txt today
 * 50bb833 modify second time
@@ -314,4 +317,8 @@ git rebase --continue
 * 0d0689c dmw add a file it is ok
 * e8d22e1 master add two files
 
+```
+* 使用命令行删除远程分支
+```xml
+git push origin --delete feature-20180720-input-blacklist-reason
 ```
