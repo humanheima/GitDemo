@@ -44,8 +44,9 @@ $ git config --global user.email johndoe@example.com
 19.  git merge --no-ff -m "merge with no-ff" dev 禁用Fast forward
 20.  git stash 把当前未提交的修改贮藏起来，是否添加进了 暂存区都可以。
 21.  git stash list 查贮藏的的现场
-22.  git stash apply 恢复贮藏的内容，但是贮藏的内容并不会删除，可以使用 git stash drop 来删除。
-23.  git stash pop 恢复贮藏的内容，恢复的同时把stash内容也删了。
+*.  git stash apply 恢复贮藏的内容，但是贮藏的内容并不会删除，可以使用 git stash drop 来删除。
+    使用git stash apply 恢复贮藏的内容 ，本来暂存的文件，也会被重新放回工作目录，如果想把stash前暂存的文件在应用暂存后重新放进暂存区的话可以使用git stash apply --index
+*.  git stash pop 恢复贮藏的内容，恢复的同时把stash内容也删了。
 24.  关于20条，21条，22条，23条的说明： 你可以多次stash，恢复的时候，先用git stash list查看，然后恢复指定的stash，git stash apply stash@{0} ， git stash drop stash@{0}，git stash pop stash@{0}。
 25.  git branch -D <name> 强行删除一个没有被合并过的分支
 26.  git remote 查看远程库的信息
