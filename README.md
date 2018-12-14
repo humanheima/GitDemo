@@ -324,8 +324,9 @@ git rebase --continue
 git push origin --delete feature-20180720-input-blacklist-reason
 ```
 ### Git只合并某次commit
-### Git只合并某次commit参考链接 [git只合并某次commit
-](https://www.jianshu.com/p/24e651a6a2ac)
+### Git只合并某次commit
+
+参考链接 [git只合并某次commit](https://www.jianshu.com/p/24e651a6a2ac)
 
 如图所示
 
@@ -339,3 +340,28 @@ git push origin --delete feature-20180720-input-blacklist-reason
 3. 运行 git cherry-pick d42ccdf
 4. 遇到冲突，解决后 运行 git add 冲突的文件
 5. 运行 git cherry-pick --continue 即可。这时候会弹出编辑框，让你编辑提交信息，编辑完毕保存即可。
+
+
+现在我想合并 dmw 分支上的 两次提交 到 maste分支上
+
+### 合并某个分支上的一系列commits
+
+如图所示
+
+![modify readme three times](modify_readme_three_times.png)
+
+modify readme.md the second time  [e5a9ca5]
+modify readme.md the first time   [1ef07c2]
+
+方法1 ：
+
+1. 运行 git checkout -b dmw-temp 基于dmw分支的modify readme.md the second time 这个提交新建一个临时分支 dmw-temp 并切换到 dmw-temp分支
+2. 然后运行 git rebase --onto master 1ef07c2^  把 dmw-temp 分支上 从e5a9ca5 到 1ef07c2 的提交都rebase到 master分支上 。
+1ef07c2^ 表示从哪个提交开始
+3. 切换到 master 分支 ，运行 git merge dmw-temp 即可。
+
+方法2：
+1. 运行 git checkout -b dmw-temp 基于dmw分支的modify readme.md the second time 这个提交新建一个临时分支 dmw-temp 并切换到 dmw-temp分支
+2. 然后使用交互式变基 git rebase -i master ，然后选取想要的提交。
+3. 切换到 maser 分支 git merge dmw-temp 即可。然后删除历史分支。
+
