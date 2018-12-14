@@ -324,7 +324,7 @@ git rebase --continue
 git push origin --delete feature-20180720-input-blacklist-reason
 ```
 ### Git只合并某次commit
-参考链接 [git只合并某次commit
+### Git只合并某次commit参考链接 [git只合并某次commit
 ](https://www.jianshu.com/p/24e651a6a2ac)
 
 如图所示
