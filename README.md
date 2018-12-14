@@ -323,3 +323,19 @@ git rebase --continue
 ```xml
 git push origin --delete feature-20180720-input-blacklist-reason
 ```
+### Git只合并某次commit
+参考链接 [git只合并某次commit
+](https://www.jianshu.com/p/24e651a6a2ac)
+
+如图所示
+
+![modify_readme_three_times](modify_readme_three_times.png)
+
+现在 dmw分支上比master分支上多个3个提交
+必须我现在只想要 modify readme.md second time 这次提交
+
+1. 先找到这次提交的哈希值 d42ccdf
+2. 切换到 master分支
+3. 运行 git cherry-pick d42ccdf
+4. 遇到冲突，解决后 运行 git add 冲突的文件
+5. 运行 git cherry-pick --continue 即可。这时候会弹出编辑框，让你编辑提交信息，编辑完毕保存即可。
