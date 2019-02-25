@@ -20,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void backToLastCommit() {
+        Log.d(TAG, "backToLastCommit: ");
     }
 
     private void testReset() {
