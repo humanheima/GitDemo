@@ -24,6 +24,11 @@ $ git config --global user.email johndoe@example.com
 * git status --short 输出简单的状态信息
 * git remote show origin 显示远程仓库更多的信息
 
+* git  remote add origin https://github.com/flutterchina/flutter-in-action.git 添加远程仓库地址
+
+*git  remote set-url origin https://github.com/flutterchina/flutter-in-action.git 修改远程仓库地址
+
+
 **关于撤销修改**
 
 场景1：当你改乱了工作区某个文件的内容，想直接丢弃工作区的修改时，用命令git checkout -- file。
