@@ -13,7 +13,8 @@ public class MainActivity extends AppCompatActivity {
         Log.d(TAG, "onCreate: ");
         setContentView(R.layout.activity_main);
         Log.d(TAG, "onCreate: dmw");
-        Log.d(TAG, "onCreate: dmw2");
+        Log.d(TAG, "onCreate: dev1");
+        Log.d(TAG, "onCreate: dev2");
     }
 
     @Override
