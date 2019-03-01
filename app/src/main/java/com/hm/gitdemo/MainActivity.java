@@ -12,6 +12,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         Log.d(TAG, "onCreate: ");
         setContentView(R.layout.activity_main);
+        Log.d(TAG, "onCreate: dmw");
+        Log.d(TAG, "onCreate: dmw2");
     }
 
     @Override
