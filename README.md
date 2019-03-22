@@ -56,7 +56,9 @@ $ git config --global user.email johndoe@example.com
 25.  git branch -D <name> 强行删除一个没有被合并过的分支
 26.  git remote 查看远程库的信息
 27.  git remote -v显示更详细的信息 
-28.  git pull -rebase 使用变基的形式拉取代码
+
+* git pull 将来自远程存储库的更改合并到当前分支中。 在默认模式下，git pull==git fetch + git merge FETCH_HEAD。
+* git pull --rebase 使用变基的形式拉取代码==git fetch + git rebase FETCH_HEAD。
 
     `git remote -v`
 
