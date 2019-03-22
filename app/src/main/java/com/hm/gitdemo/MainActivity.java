@@ -12,6 +12,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         Log.d(TAG, "onCreate: ");
         setContentView(R.layout.activity_main);
+        Log.d(TAG, "onCreate: dmw");
+        Log.d(TAG, "onCreate: dev1");
+        Log.d(TAG, "onCreate: dev2");
     }
 
     @Override
@@ -20,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void backToLastCommit() {
+        Log.d(TAG, "backToLastCommit: ");
     }
 
     private void testReset() {

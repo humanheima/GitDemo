@@ -24,6 +24,11 @@ $ git config --global user.email johndoe@example.com
 * git status --short 输出简单的状态信息
 * git remote show origin 显示远程仓库更多的信息
 
+* git  remote add origin https://github.com/flutterchina/flutter-in-action.git 添加远程仓库地址
+
+*git  remote set-url origin https://github.com/flutterchina/flutter-in-action.git 修改远程仓库地址
+
+
 **关于撤销修改**
 
 场景1：当你改乱了工作区某个文件的内容，想直接丢弃工作区的修改时，用命令git checkout -- file。
@@ -51,7 +56,9 @@ $ git config --global user.email johndoe@example.com
 25.  git branch -D <name> 强行删除一个没有被合并过的分支
 26.  git remote 查看远程库的信息
 27.  git remote -v显示更详细的信息 
-28.  git pull -rebase 使用变基的形式拉取代码
+
+* git pull 将来自远程存储库的更改合并到当前分支中。 在默认模式下，git pull==git fetch + git merge FETCH_HEAD。
+* git pull --rebase 使用变基的形式拉取代码==git fetch + git rebase FETCH_HEAD。
 
     `git remote -v`
 
