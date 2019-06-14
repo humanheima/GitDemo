@@ -26,8 +26,9 @@ $ git config --global user.email johndoe@example.com
 
 * git  remote add origin https://github.com/flutterchina/flutter-in-action.git 添加远程仓库地址
 
-*git  remote set-url origin https://github.com/flutterchina/flutter-in-action.git 修改远程仓库地址
+* git  remote set-url origin https://github.com/flutterchina/flutter-in-action.git 修改远程仓库地址
 
+* git reset --hard origin/master 使用远程分支覆盖本地分支 
 
 **关于撤销修改**
 
