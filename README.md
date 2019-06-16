@@ -373,3 +373,24 @@ modify readme.md the first time   [1ef07c2]
 2. 然后使用交互式变基 git rebase -i master ，然后选取想要的提交。
 3. 切换到 maser 分支 git merge dmw-temp 即可。然后删除历史分支。
 
+
+### clone的仓库如何和原始仓库保持同步
+
+1. git remote add upstream 原始仓库地址
+
+2. 这个时候 运行 git remote -v,可以看到远程多了一个地址 upstream
+
+```
+origin    https://github.com/YOUR_USERNAME/YOUR_FORK.git (fetch)
+origin    https://github.com/YOUR_USERNAME/YOUR_FORK.git (push)
+upstream  https://github.com/ORIGINAL_OWNER/ORIGINAL_REPOSITORY.git (fetch)
+upstream  https://github.com/ORIGINAL_OWNER/ORIGINAL_REPOSITORY.git (push)
+
+```
+
+3. git pull upstream master  --rebase (从原始的的远程仓库拉取更改)
+* 
+参考：
+[Syncing a fork](https://help.github.com/en/articles/syncing-a-fork)
+
+
