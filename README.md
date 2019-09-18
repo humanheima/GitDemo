@@ -134,6 +134,39 @@ rebase过程中用到的命令提示
 
 ```
 
+## merge
+
+1. 使用非快进的方式合并
+
+```
+git merge [分支] --no--ff
+
+```
+
+2. 默认是快进合并
+
+```
+git merge [分支] --ff
+
+```
+
+3. 如果在合并过程中出现了冲突
+
+3.1 解决冲突，然后 
+```
+git add . 
+
+```
+3.2 提交，完成合并
+
+```
+git commit
+
+```
+
+
+
+
 ## rebase
 场景 存在master分支，然后从master分支检出dmw分支，然后两者并行工作，master分支上提交了两次，dmw分支上也提交了两次，现在图谱如下
 ![初始图谱](initial.png)
@@ -331,7 +364,7 @@ git rebase --continue
 ```xml
 git push origin --delete feature-20180720-input-blacklist-reason
 ```
-### Git只合并某次commit
+
 ### Git只合并某次commit
 
 参考链接 [git只合并某次commit](https://www.jianshu.com/p/24e651a6a2ac)
@@ -350,20 +383,27 @@ git push origin --delete feature-20180720-input-blacklist-reason
 5. 运行 git cherry-pick --continue 即可。这时候会弹出编辑框，让你编辑提交信息，编辑完毕保存即可。
 
 
-现在我想合并 dmw 分支上的 两次提交 到 maste分支上
 
 ### 合并某个分支上的一系列commits
+
+现在我想合并 dmw 分支上的 两次提交 到 maste分支上
+
+modify readme.md the second time  [e5a9ca5]
+
+modify readme.md the first time   [1ef07c2]
+
 
 如图所示
 
 ![modify readme three times](modify_readme_three_times.png)
 
-modify readme.md the second time  [e5a9ca5]
-modify readme.md the first time   [1ef07c2]
 
 方法1 ：
 
-1. 运行 git checkout -b dmw-temp 基于dmw分支的modify readme.md the second time 这个提交新建一个临时分支 dmw-temp 并切换到 dmw-temp分支
+1. 基于dmw分支的modify readme.md the second time 这个提交新建一个临时分支 dmw-temp 并切换到 dmw-temp分支。
+```
+git checkout -b dmw-temp e5a9ca5
+```
 2. 然后运行 git rebase --onto master 1ef07c2^  把 dmw-temp 分支上 从e5a9ca5 到 1ef07c2 的提交都rebase到 master分支上 。
 1ef07c2^ 表示从哪个提交开始
 3. 切换到 master 分支 ，运行 git merge dmw-temp 即可。
@@ -389,7 +429,7 @@ upstream  https://github.com/ORIGINAL_OWNER/ORIGINAL_REPOSITORY.git (push)
 ```
 
 3. git pull upstream master  --rebase (从原始的的远程仓库拉取更改)
-* 
+
 参考：
 [Syncing a fork](https://help.github.com/en/articles/syncing-a-fork)
 
