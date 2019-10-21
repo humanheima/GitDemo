@@ -44,7 +44,11 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void mainV1(){
+    private void mainV1() {
+
+    }
+
+    private void mainV2() {
 
     }
 }
