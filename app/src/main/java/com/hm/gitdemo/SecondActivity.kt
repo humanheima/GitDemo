@@ -14,4 +14,8 @@ class SecondActivity : AppCompatActivity() {
 
     }
 
+    private fun secondV1(){
+
+    }
+
 }

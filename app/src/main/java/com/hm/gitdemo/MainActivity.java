@@ -43,4 +43,8 @@ public class MainActivity extends AppCompatActivity {
         Log.d(TAG, "testResetNoConflict:i am dev");
 
     }
+
+    private void mainV1(){
+
+    }
 }
