@@ -1,12 +1,13 @@
 package com.hm.gitdemo;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 public class MainActivity extends AppCompatActivity {
 
-    private final String TAG=getClass().getSimpleName();
+    private final String TAG = getClass().getSimpleName();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,6 +28,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void testReset() {
+
+    }
+
+    private void testResetSingleFile() {
+
+    }
+
+    private void testResetSingleFile1() {
 
     }
 

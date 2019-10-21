@@ -433,4 +433,20 @@ upstream  https://github.com/ORIGINAL_OWNER/ORIGINAL_REPOSITORY.git (push)
 参考：
 [Syncing a fork](https://help.github.com/en/articles/syncing-a-fork)
 
+### git 回退某个文件到特定版本
+
+```
+git checkout [commit id] [fileName]
+
+```
+
+```
+git checkout 8bbb42f /Users/dumingwei/AndroidStudioProjects/GitDemo/app/src/main/java/com/hm/gitdemo/SecondActivity.kt
+
+```
+
+
+
+
+
 
