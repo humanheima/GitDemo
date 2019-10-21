@@ -18,4 +18,8 @@ class ThirdActivity : AppCompatActivity() {
 
     }
 
+    private fun thirdV3() {
+
+    }
+
 }
