@@ -30,6 +30,13 @@ class SecondActivity : AppCompatActivity() {
      * 开始测试cherry-pick
      */
     private fun startTestCherryPick() {
+        
+    }
+
+    /**
+     * 测试cherry-pickV1
+     */
+    private fun cherryPickV1() {
 
     }
 
