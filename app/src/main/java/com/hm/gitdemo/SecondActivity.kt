@@ -40,4 +40,11 @@ class SecondActivity : AppCompatActivity() {
 
     }
 
+    /**
+     * 测试cherry-pickV2
+     */
+    private fun cherryPickV2() {
+
+    }
+
 }
