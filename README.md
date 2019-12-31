@@ -169,51 +169,74 @@ git commit
 
 ## rebase
 场景 存在master分支，然后从master分支检出dmw分支，然后两者并行工作，master分支上提交了两次，dmw分支上也提交了两次，现在图谱如下
+
 ![初始图谱](initial.png)
 
 最终我们的目的是把所有的修改都合并到master分支上，步骤如下
 1. git checkout dmw 首先切换到dmw分支
 2. git rebase master 把dwm分支变基到master分支上
 现在图谱如下
+
 ![rebase_master](rebase_master.png)
+
 3. 切换到master分支，然后合并dmw分支即可
 ```xml
 git checkout master
 git merge dmw
 ```
 合并后的图谱
+
 ![merge_dmw](merge_dmw.png)
 
 ## 交互式rebase
+
 1. 修改提交记录
+
 图谱如下
+
 ![](modify_commit_message.png)
+
 我现在在dmw分支上，我想修改`dmw add a file'这次提交记录，操作步骤
-* 首先回到这次提交的上一次提交，就是`master add two files`这次提交,这次提交的commit id是 e8d22e1 
-```
-git rebase -i e8d22e1
+
+* 首先回到这次提交的上一次提交，就是`master add two files`这次提交，这次提交的commit id是 e8d22e1 
 
 ```
+git rebase -i e8d22e1
+```
 弹出下面的对话框
+
 ![start rebase](start_rebase.png)
-* 然后把`dmw add a file'这次提交的前面的pick改为edit，如下图所示
+
+* 然后把`dmw add a file`这次提交的前面的pick改为edit，如下图所示
+
 ![change pick to edit](change_pick_to_edit.png)
+
 然后保存退出
+
 * 使用如下命令修改提交信息
+
 ```text
 git commit --amend
 ```
-* 修改完提交信息以后，使用 如下命令继续rebase
+
+* 修改完提交信息以后，使用 如下命令继续变基
+
 ```text
 git rebase --continue
 ```
+
 成功以后查看图谱如下
+
 ![modify commit message finish](modify_commit_message_finish.png)
 
 2. 删除某次提交并调整提交的顺序
+
 现在dmw分支上多做几次提交，图谱如下
+
 ![more commit](more_commit.png)
+
 我想要做的操作 把 `f634c6a`这个提交删除，交换`144f5e4`和`34afe94`这两次提交交换顺序
+
 ```text
 * 144f5e4 (HEAD -> dmw) delete a line
 * 34afe94  modify dmw.txt add aline
@@ -221,14 +244,17 @@ git rebase --continue
 * 8377d1a modify dmw.txt
 * 0d0689c dmw add a file it is ok
 * e8d22e1 master add two files
-
 ```
+
 * 首先回到 `8377d1a modify dmw.txt`这次提交
+
 ```text
 git rebase -i 8377d1a
 ```
+
 图谱如下
-[rebase change commit order and remove one commit](rebase_change_commit_order_and_remove_one_commit.png)
+
+![rebase change commit order and remove one commit](rebase_change_commit_order_and_remove_one_commit.png)
 
 在上面弹出的编辑框中修改如下,然后保存退出即可
 ```text
@@ -237,7 +263,9 @@ pick 144f5e4  delete a line
 pick 34afe94  modify dmw.txt add aline
  
 ```
-修改完成后，查看图谱,成功
+
+修改完成后，查看图谱，成功
+
 ![](after_change_commit_order_and_remove_one_commit.png)
 
 3. 合并多次提交为一次提交
@@ -250,23 +278,30 @@ pick 34afe94  modify dmw.txt add aline
 * 8377d1a modify dmw.txt
 * 0d0689c dmw add a file it is ok
 * e8d22e1 master add two files
-
 ```
-现在想合并`928ae89`,`50bb833`,`1b9b1af`这三次提交为一次提交，步骤如下
+现在想合并`928ae89`，`50bb833`，`1b9b1af`这三次提交为一次提交，步骤如下
+
 * 首先回到` 68ab912  modify dmw.txt add aline`这次提交
+
 ```text
 git rebase -i 68ab912
 ```
+
 弹出的编辑框如下
+
 ![marge many commits](merge_many_commits.png)
+
 然后修改编辑信息如下
+
 ![use squash](use_squash.png)
+
 保存以后，会弹出一个编辑框，让你输入提交信息，输入提交信息，然后保存
+
 ![input message](input_commit_message.png)
+
 保存后，变基成功，查看提交历史
 ```text
 $ git log --graph --oneline
-
 ```
 结果如下，合并了三次提交为一次提交
 ```text
@@ -276,7 +311,6 @@ $ git log --graph --oneline
 * 8377d1a modify dmw.txt
 * 0d0689c dmw add a file it is ok
 * e8d22e1 master add two files
-
 ```
 
 4. 现在提交历史如下
@@ -292,27 +326,27 @@ $ git log --graph --oneline
 * 8377d1a modify dmw.txt
 * 0d0689c dmw add a file it is ok
 * e8d22e1 master add two files
-
 ```
 现在想要把`6d1d443 add a line in today.txt`这个提交拆分成两次提交信息
 
 * 首先回到这次提交的上次提交`ec53171 add dmw2.txt`
+
 ```text
 git rebase -i ec53171
 ```
+
 弹出的编辑框如下
+
 ```text
 pick 6d1d443 add a line in today.txt
 pick 808d9cf add second line haha
 pick d449efe modify test.txt
-
 ```
 然后修改编辑内容如下，并保存
 ```text
 edit 6d1d443 add a line in today.txt
 pick 808d9cf add second line haha
 pick d449efe modify test.txt
-
 ```
 当前提交历史如下
 ```text
@@ -325,16 +359,15 @@ pick d449efe modify test.txt
 * 8377d1a modify dmw.txt
 * 0d0689c dmw add a file it is ok
 * e8d22e1 master add two files
-
-
 ```
 然后reset到上一个提交,注意 不能加 --hard选项
 ```text
 git reset HEAD^
-
 ```
 然后修改 today.txt 然后提交一次  ` first split`
+
 然后再次修改today.txt然后提交一次  `"second split`
+
 然后运行
 ```text
 git rebase --continue
@@ -358,8 +391,8 @@ git rebase --continue
 * 8377d1a modify dmw.txt
 * 0d0689c dmw add a file it is ok
 * e8d22e1 master add two files
-
 ```
+
 * 使用命令行删除远程分支
 ```xml
 git push origin --delete feature-20180720-input-blacklist-reason
