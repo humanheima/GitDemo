@@ -486,5 +486,8 @@ git checkout 8bbb42f /Users/dumingwei/AndroidStudioProjects/GitDemo/app/src/main
 test_revert_merge  测试撤销合并1。
 test_revert_merge  测试撤销合并2。
 
+test_revert_merge  测试撤销合并3。
+test_revert_merge  测试撤销合并4。
+
 
 
