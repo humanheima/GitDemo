@@ -1,0 +1,3 @@
+[submodule "RecyclerViewDemo"]
+	path = RecyclerViewDemo
+	url = git@github.com:humanheima/RecyclerViewDemo.git
