@@ -39,6 +39,8 @@ $ git config --global user.email johndoe@example.com
 
 场景3：已经提交了不合适的修改到版本库时，想要撤销本次提交，git reset --hard HEAD^，不过前提是没有推送到远程库。
 
+场景4：已经提交了不合适的修改到版本库，并推送到了远端分支，可以使用`git revert <commit id>`来进行撤销。具体请看`撤销修改后如何将代码再加进来.md`
+
 11. ssh-keygen -t rsa -C "youremail@example.com" 生成 SHH key
 12.  git branch 查看分支
 13.  git branch branchname 新建分支
