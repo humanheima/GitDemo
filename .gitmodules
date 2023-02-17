@@ -1,3 +1,6 @@
 [submodule "RecyclerViewDemo"]
 	path = RecyclerViewDemo
 	url = git@github.com:humanheima/RecyclerViewDemo.git
+[submodule "ServiceDemo"]
+	path = ServiceDemo
+	url = git@github.com:humanheima/ServiceDemo.git
